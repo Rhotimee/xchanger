@@ -1,17 +1,18 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import TemplateView, View
+from django.views.generic import CreateView
 from django.conf import settings
-
-from .forms import ProfileForm, UserForm
+from .utils import naira
+from .models import SbdSellOrder
+from .forms import ProfileForm, UserForm, SbdSellOrderForm
 
 
 def index_view(request):
     if request.user.is_authenticated():
-        return render(request, 'core/dashboard.html')
+        return render(request, 'core/dashboard.html', context={'naira': naira()})
     else:
-        return render(request, 'index.html')
+        return render(request, 'index.html', context={'naira': naira()})
 
 
 @login_required
@@ -32,3 +33,13 @@ def update_profile(request):
         'user_form': user_form,
         'profile_form': profile_form
     })
+
+
+class SbdCreateView(LoginRequiredMixin, CreateView):
+    model = SbdSellOrder
+    form_class = SbdSellOrderForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        # messages.success(self.request, 'Your task was created successfully. ')
+        return super(SbdCreateView, self).form_valid(form)
