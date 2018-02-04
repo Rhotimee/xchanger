@@ -5,6 +5,9 @@
     <title>Title</title>
 </head>
 <body>
+<a href="{% url 'core:index' %}">Home</a>
+<a href="{% url 'core:update' %}">Update Details</a>
+
     Logged In
     {{ user }}
     {{ user.dashboard.phone_number }}
