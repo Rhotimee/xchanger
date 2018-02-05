@@ -1,7 +1,8 @@
 import requests
 
-def naira():
-    return 1334
+
+def naira(request):
+    return {'naira': 1334}
 
 # def naira():
 #     response1 = requests.get("https://bittrex.com/api/v1.1/public/getticker?market=usdt-btc")

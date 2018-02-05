@@ -1,11 +1,12 @@
 <h3 class="mb-4">Order Form</h3>
-<form>
-
+<form class="form" method="POST" enctype="multipart/form-data" action="{% url 'core:create' %}">
+    {% csrf_token %}
+    {{ form.errors }}
     <div class="input-group mb-2">
         <div class="input-group-prepend">
-            <div class="input-group-text">Sbd To Sell</div>
+            <div class="input-group-text">You Send</div>
          </div>
-        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="1">
+        <input type="text" class="form-control" name="sbd" id="id_sbd" value="1">
         <div class="input-group-prepend">
             <div class="input-group-text">Sbd</div>
          </div>
@@ -13,9 +14,9 @@
 
     <div class="input-group mb-2">
         <div class="input-group-prepend">
-            <div class="input-group-text">Equals</div>
+            <div class="input-group-text">You Get</div>
          </div>
-        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="{{ naira }}">
+        <input type="text" class="form-control" name="sbd_ngn" id="id_sbd_ngn" value="{{ naira }}">
         <div class="input-group-prepend">
             <div class="input-group-text">&#x20a6</div>
          </div>

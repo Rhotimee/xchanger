@@ -1,7 +1,8 @@
 {#{% load crispy_forms_tags %}#}
-<form class="form" method="POST" enctype="multipart/form-data" action="{% if action_url  %}{{ action_url }}{% endif %} ">
+<form class="form" method="POST" enctype="multipart/form-data" action="{% url 'core:create' %}">
     {% csrf_token %}
 {#    {{ form|crispy }}#}
     {{ form.as_p }}
     <input class="btn btn-primary" type="submit" value="Submit" />
 </form>
+

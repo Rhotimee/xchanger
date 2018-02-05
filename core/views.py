@@ -3,16 +3,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic import CreateView, ListView
 from django.conf import settings
-from .utils import naira
 from .models import SbdSellOrder
 from .forms import ProfileForm, UserForm, SbdSellOrderForm
 
 
 def index_view(request):
     if request.user.is_authenticated():
-        return render(request, 'core/dashboard.html', context={'naira': naira()})
+        return render(request, 'core/dashboard.html')
     else:
-        return render(request, 'index.html', context={'naira': naira()})
+        return render(request, 'index.html')
 
 
 @login_required
@@ -38,6 +37,7 @@ def update_profile(request):
 class SbdCreateView(LoginRequiredMixin, CreateView):
     model = SbdSellOrder
     form_class = SbdSellOrderForm
+    template_name = 'core/dashboard.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user

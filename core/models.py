@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models
 from django.db.models.signals import post_save
+from django.shortcuts import reverse
 
 User = settings.AUTH_USER_MODEL
 
@@ -48,7 +49,7 @@ class SbdSellOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     sbd = models.DecimalField(max_digits=10, decimal_places=3)
     sbd_ngn = models.DecimalField(max_digits=10, decimal_places=2) # Unit Price
-    sbd_usd = models.DecimalField(max_digits=10, decimal_places=2) # total price in Naira
+    sbd_usd = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True) # total price in Naira
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.BooleanField(default=False)
@@ -58,6 +59,9 @@ class SbdSellOrder(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def get_absolute_url(self):
+        return reverse('core:index')
 
 
 def post_save_user_receiver(sender, instance, created, *args, **kwargs):
