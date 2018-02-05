@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, HttpResponseRedirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.conf import settings
 from .utils import naira
 from .models import SbdSellOrder
@@ -45,3 +45,6 @@ class SbdCreateView(LoginRequiredMixin, CreateView):
         return super(SbdCreateView, self).form_valid(form)
 
 
+class SbdList (LoginRequiredMixin, ListView):
+    model = SbdSellOrder
+    template_name = 'core/dashboard.html'

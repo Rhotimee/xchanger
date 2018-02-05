@@ -36,12 +36,12 @@
                     {% if request.user.is_authenticated %}
 
                     <li class="nav-item dropdown px-2">
-                        <button href="javascript:void(0)" class="dropdown-toggle btn btn-round btn-info" data-toggle="dropdown" aria-expanded="false">My Account <b class="caret"></b></button>
+                        <button href="javascript:void(0)" class="dropdown-toggle btn btn-round btn-primary" data-toggle="dropdown" aria-expanded="false">My Account</button>
                         <ul class="dropdown-menu dropdown-menu-right dropdown-info">
                             <li class="dropdown-header">{{ user.email }}</li>
-                            <li class="dropdown-item"><a href="/change">Change Password</a></li>
+                            <li class="dropdown-item"><a href="{% url 'account_change_password' %}">Change Password</a></li>
                             <div class="dropdown-divider"></div>
-                            <li class="dropdown-item"><a href="/logout">Logout</a></li>
+                            <li class="dropdown-item"><a href="{% url 'account_logout' %}">Logout</a></li>
                         </ul>
                     </li>
 

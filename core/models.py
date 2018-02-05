@@ -35,7 +35,7 @@ class Dashboard(models.Model):
         ('Wema Bank', 'Wema Bank'),
         ('Zenith Bank', 'Zenith Bankk'),
     )
-    bank = models.CharField(max_length=50, default='Guaranty Trust Bank', choices=banks)
+    bank = models.CharField(max_length=50, choices=banks)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     verified = models.BooleanField(default=False)
@@ -47,10 +47,14 @@ class Dashboard(models.Model):
 class SbdSellOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     sbd = models.DecimalField(max_digits=10, decimal_places=3)
-    sbd_ngn = models.DecimalField(max_digits=10, decimal_places=2)
-    sbd_usd = models.DecimalField(max_digits=10, decimal_places=2)
+    sbd_ngn = models.DecimalField(max_digits=10, decimal_places=2) # Unit Price
+    sbd_usd = models.DecimalField(max_digits=10, decimal_places=2) # total price in Naira
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    status = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["-timestamp"]
 
     def __str__(self):
         return self.user.username

@@ -17,7 +17,7 @@
                             <li class="list-group-item">Bank Region: {{ user.dashboard.bank_region }}</li>
                             <li class="list-group-item">Account Number: {{ user.dashboard.bank_account_number }}</li>
                             <li class="list-group-item">Bank: {{ user.dashboard.bank }}</li>
-                            <li class="list-group-item">Joined: {{ user.dashboard.timestamp|timesince }}</li>
+                            <li class="list-group-item">Joined: {{ user.dashboard.timestamp|timesince }} ago</li>
 
                         </ul>
                         <div class="card-footer">
@@ -28,7 +28,7 @@
 
                 </div>
 
-                <div class="col-md align-self-center card bg-danger text-center card-form mx-2">
+                <div class="col-md align-self-center card bg-primary text-center card-form mx-2">
                     {% include 'order-form.html' %}
 
                 </div>
@@ -36,11 +36,11 @@
             </div>
         </div>
 
-        <div class="container">
-            <div class="bg-light py-3"">
+        <div class="container mb-5">
+            <div class="bg-light py-3">
                 <table class="table">
                     <thrad>
-                        <h5>Your Transactions</h5>
+                        <h5 class="text-center">Your Orders</h5>
                     </thrad>
                     <thead>
                         <tr>
@@ -50,14 +50,22 @@
                             <th>Posted</th>
                         </tr>
                     </thead>
+                    {% for obj in user.sbdsellorder_set.all %}
                     <tbody>
                         <tr>
-                            <td>John</td>
-                            <td>Doe</td>
-                            <td>jdoe@gmail.com</td>
-                            <td>Date</td>
+                            <td>{{ obj.sbd }}</td>
+                            <td>{{ obj.sbd_ngn }}</td>
+
+                            {% if obj.status == True%}
+                            <td class="text-success">Processed</td>
+                            {% else %}
+                            <td class="text-warning">Processing</td>
+                            {% endif %}
+
+                            <td>{{ obj.timestamp|timesince }} ago</td>
                         </tr>
                     </tbody>
+                    {% endfor %}
                 </table>
             </div>
         </div>
