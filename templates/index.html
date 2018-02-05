@@ -1,7 +1,29 @@
 {% extends "base.html" %}
 
-
 {% block content %}
-    <p>Hi</p>
-    <p>N{{ naira }}</p>
+ <!-- HOME SECTION -->
+    <header id="home-section">
+        <div class="dark-overlay">
+            <div class="home-inner">
+                <div class="container">
+                    <div class="row m-auto">
+                        <div class="col-lg-7 text-center pl-3 mb-3 text-light align-self-center">
+                            <h1>Sell Sbd</h1>
+                            <h3>Xchanger is the fast and easy way to sell sbd in Nigeria.</h3>
+                        </div>
+
+                        <div class="col-lg-5">
+                            <div class="card bg-danger text-center card-form align-self-center">
+                                <div class="card-body">
+                                    {% include 'order-form.html' %}
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 {% endblock content %}

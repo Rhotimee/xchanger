@@ -43,3 +43,5 @@ class SbdCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         # messages.success(self.request, 'Your task was created successfully. ')
         return super(SbdCreateView, self).form_valid(form)
+
+

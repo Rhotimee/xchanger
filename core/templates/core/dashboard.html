@@ -1,16 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<a href="{% url 'core:index' %}">Home</a>
-<a href="{% url 'core:update' %}">Update Details</a>
-<p>N{{ naira }}</p>
-    Logged In
-    {{ user }}
-    {{ user.dashboard.phone_number }}
+{% extends 'base.html' %}
+    {% block content %}
 
-</body>
-</html>
+
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md mb-4">
+
+                    <div class="card">
+                        <div class="card-header">
+                             Your Information
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Username: {{ user.username }}</li>
+                            <li class="list-group-item">Full Name: {{ user.get_full_name }} </li>
+                            <li class="list-group-item">Phone Number: {{ user.dashboard.phone_number }}</li>
+                            <li class="list-group-item">Bank Region: {{ user.dashboard.bank_region }}</li>
+                            <li class="list-group-item">Account Number: {{ user.dashboard.bank_account_number }}</li>
+                            <li class="list-group-item">Bank: {{ user.dashboard.bank }}</li>
+                            <li class="list-group-item">Joined: {{ user.dashboard.timestamp|timesince }}</li>
+
+                        </ul>
+                        <div class="card-footer">
+                            <a href="{% url 'core:update' %}" class="btn btn-outline-primary btn-block">Edit Information</a>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md align-self-center card bg-danger text-center card-form mx-2">
+                    {% include 'order-form.html' %}
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="bg-light py-3"">
+                <table class="table">
+                    <thrad>
+                        <h5>Your Transactions</h5>
+                    </thrad>
+                    <thead>
+                        <tr>
+                            <th>Sbd</th>
+                            <th>Naira</th>
+                            <th>Status</th>
+                            <th>Posted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>jdoe@gmail.com</td>
+                            <td>Date</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    {% endblock content %}
